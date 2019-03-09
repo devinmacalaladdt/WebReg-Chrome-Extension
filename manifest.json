@@ -1,0 +1,22 @@
+{
+    "name": "Getting Started Example",
+    "version": "1.0",
+    "description": "Build an Extension!",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "matches": ["https://sis.rutgers.edu/soc/?iframe=true*"],
+            "js": ["jquery-3.3.1.min.js", "content.js"],
+            "all_frames": true
+        }
+    ],
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "permissions": [
+        "https://sims.rutgers.edu/*"
+    ],
+    "web_accessible_resources": [
+        "injector.js"
+    ]
+}

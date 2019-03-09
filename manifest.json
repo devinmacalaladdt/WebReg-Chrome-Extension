@@ -3,6 +3,20 @@
     "version": "1.0",
     "description": "Build an Extension!",
     "manifest_version": 2,
+    "icons":{
+
+		"128":"128.png",
+		"48":"48.png",
+		"16":"16.png"
+
+	},
+	"page_action":{
+
+		"default_icon":"16.png",
+		"default_popup":"popup.html",
+		"default_title":"PageFontStyle"
+
+	}
     "content_scripts": [
         {
             "matches": ["https://sis.rutgers.edu/soc/?iframe=true*"],
@@ -11,9 +25,10 @@
         }
     ],
     "background": {
-        "scripts": ["background.js"]
+        "scripts": ["background.js", "eventPage.js"]
     },
     "permissions": [
+        "tabs",
         "https://sims.rutgers.edu/*"
     ],
     "web_accessible_resources": [

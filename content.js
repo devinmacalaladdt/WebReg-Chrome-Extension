@@ -1,6 +1,8 @@
 //If we selected semesters already, hijack the courses information from browsing page
 
+chrome.runtime.sendMessage({todo: "showPageAction"});
 setInterval(events_handler, 500);
+setInterval(generate_links, 500);   //This repeatly checks if the links added yet
 
 var hijacked_ = false;
 var courses = [];
@@ -44,4 +46,26 @@ function events_handler() {
 			$("#continueButton").click();
 		}
 	}
+}
+
+function generate_links(){
+
+	if($("a").hasClass("instructor_link")){
+		return;
+	}
+
+	$(".instructors").each(function(){
+		var name = $(this).text();
+		$(this).text("");
+		name = name.toLowerCase();
+
+		var names = name.split(";");
+
+		var count = 0;
+		for(count = 0;count<names.length;count++){
+			$(this).append("<a class=\"instructor_link\" href=\"http://www.google.com/search?q="+names[count]+"+rutgers+rate+my+professors"+"\" target=\"_blank\">"+names[count]+"</a>");
+		}
+	});
+
+
 }

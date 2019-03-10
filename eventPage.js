@@ -8,7 +8,6 @@ chrome.runtime.onMessage.addListener(function(request,sender,sendResponse){
 
 		});
 
-		$("iframe-wrapper iframe").contents().find(".instructors").css("color","blue");
 
 	}
 

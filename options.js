@@ -1,5 +1,14 @@
 $(function(){
 
+	chrome.storage.sync.get('checked_list', function(obj) {
+		if(jQuery.isEmptyObject(obj)) 
+			return;
+		items = obj["checked_list"].split(';');
+		for(i = 0;i < items.length - 1;i++) {
+			$('#' + items[i]).attr("checked", true);
+		}
+	});
+
 	$("#save_button").click(function(){
 
 		var checked_list = "";

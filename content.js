@@ -1,16 +1,13 @@
 //If we selected semesters already, hijack the courses information from browsing page
 
 chrome.runtime.sendMessage({todo: "showPageAction"});
-var interval = setInterval(events_handler, 700);
 
 var hijacked_ = false;
 var courses = [];
 var registeredIndexes = [];
 var currentCourses = [];
 var registeredHTML = '';
-
 var injector = chrome.extension.getURL("injector.js");
-var courses_injector = chrome.extension.getURL("courses_injector.js");
 
 document.addEventListener("DZZ_HACK", function(e) {
                         console.log("Change detected");
@@ -23,16 +20,29 @@ document.addEventListener("DZZ_HACK_COURSES", function(e) {
                     courses = e.detail;  //Hijack courses once only
                 });
 
-function hijack_courses() {
+document.addEventListener("DZZ_HACK_INIT", function(e) {
+                    //On the selecting terms directory
+                    //Click on the button
+                    chrome.storage.sync.get("checked_list",function(to_check_str){
+                        if(jQuery.isEmptyObject(to_check_str)) {
+                               window.open(chrome.extension.getURL('options.html'));
+                            return;
+                        }
+                        var str = to_check_str['checked_list'];
+                        str = str.split(";");
+                        var count;
+                        for(count = 0;count<str.length-1;count++){
+                            if($("#"+str[count]).prop("checked")!=true){
+                                $("#"+str[count]).click();
+                            }
+                        }
+                        $("#continueButton").click();
+                    });
+                });
+
+function hijack() {
     var s = document.createElement("script");
     s.src = injector;
-    (document.head||document.documentElement).appendChild(s);
-    s.onload = function() {
-        s.remove();
-    }
-
-    var s = document.createElement("script");
-    s.src = courses_injector;
     (document.head||document.documentElement).appendChild(s);
     s.onload = function() {
         s.remove();
@@ -94,55 +104,22 @@ function overlapping() {
     }
 }
 
-function events_handler() {
-    if($("#termlocationlevelform").is(":hidden") && !$("#searchfilterscontent").is(":hidden")) {
-        //Selected terms already
-        if(!hijacked_) {
-            hijack_courses();   //Hijack courses
-            //Access registered course information
-            chrome.runtime.sendMessage({query: 'getRegisteredHTML'}, function(response) {
-                registeredHTML = response;
-                console.log("Hijacked registeredHTML");
-                $("[title='Course Index Number']", registeredHTML).each(function() {
-                    registeredIndexes.push($(this).text().slice(1, -1));
-                });
+function go() {
+        hijack();   //Hijack courses
+        //Access registered course information
+        chrome.runtime.sendMessage({query: 'getRegisteredHTML'}, function(response) {
+            registeredHTML = response;
+            console.log("Hijacked registeredHTML");
+            $("[title='Course Index Number']", registeredHTML).each(function() {
+                registeredIndexes.push($(this).text().slice(1, -1));
             });
-            hijacked_ = true;
-            clearInterval(interval);    //Mission finished
-        }
-    } else {
-        if(!$("#termlocationlevelform").is(":hidden")) {
-            //On the selecting terms directory
-            //Click on the button
-            chrome.storage.sync.get("checked_list",function(to_check_str){
-
-            	var str = to_check_str['checked_list'];
-            	str = str.split(";");
-            	var count;
-            	for(count = 0;count<str.length-1;count++){
-
-            		if($("#"+str[count]).prop("checked")!=true){
-
-            			$("#"+str[count]).click();
-
-            		}
-
-            	}
-
-
-            });
-
-            //$("#continueButton").click();
-        }
-    }
+        });
 }
 
 function generate_links(){
-
     if($("a").hasClass("instructor_link")){
         return;
     }
-
     $(".instructors").each(function(){
         var name = $(this).text();
         $(this).text("");
@@ -155,6 +132,6 @@ function generate_links(){
             $(this).append("<a class=\"instructor_link\" href=\"http://www.google.com/search?q="+names[count]+"+rutgers+rate+my+professors"+"\" target=\"_blank\">"+names[count]+"</a>");
         }
     });
-
-
 }
+
+go();

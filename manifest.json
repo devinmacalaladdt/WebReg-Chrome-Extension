@@ -32,6 +32,7 @@
         "https://sims.rutgers.edu/*"
     ],
     "web_accessible_resources": [
-        "injector.js"
+        "injector.js",
+        "courses_injector.js"
     ]
 }

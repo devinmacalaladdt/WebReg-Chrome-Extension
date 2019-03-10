@@ -68,8 +68,6 @@ function overlapping() {
         return;
     for(i = 0;i<registeredIndexes.length;i++) {
         section = sectionByIndex(registeredIndexes[i]);
-        console.log("User:");
-        console.log({meetingTime:section['meetingTimes']});
         for(j = 0;j<currentCourses.length;j++) {
             for(k = 0;k<currentCourses[j]['sections'].length;k++) {
                 currentSection = currentCourses[j]['sections'][k];
@@ -108,7 +106,7 @@ function overlapping() {
                                 //Do not continue in order to highlight all the overlappings
                                 //continue nextSection;
                             } else {
-                            	console.log(currentSection["meetingTimes"]);
+                                ;
                             }
                         }
                     }
@@ -117,7 +115,6 @@ function overlapping() {
 
             }
         }
-        console.log("G");
     }
 }
 

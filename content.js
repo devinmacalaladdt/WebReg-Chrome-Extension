@@ -50,6 +50,7 @@ function hijack() {
 }
 
 function sectionByIndex(idx) {
+	var i = 0, j = 0;
     for(i = 0;i < courses.length;i++) {
         for(j = 0;j< courses[i]['sections'].length;j++) {
             if(courses[i]['sections'][j]['index'] == idx)
@@ -61,13 +62,16 @@ function sectionByIndex(idx) {
 
 function overlapping() {
     //$(".sectionData", $("#courseDataParent").children()[0])[0]
+    var i = 0, j = 0, k = 0, m = 0, n = 0;
     //above is the CSS selector
     if(currentCourses == null)
         return;
     for(i = 0;i<registeredIndexes.length;i++) {
         section = sectionByIndex(registeredIndexes[i]);
+        console.log("User:");
+        console.log({meetingTime:section['meetingTimes']});
         for(j = 0;j<currentCourses.length;j++) {
-            nextSection: for(k = 0;k<currentCourses[j]['sections'].length;k++) {
+            for(k = 0;k<currentCourses[j]['sections'].length;k++) {
                 currentSection = currentCourses[j]['sections'][k];
                 for(m = 0;m < currentSection['meetingTimes'].length;m++) {
                     for(n = 0;n < section['meetingTimes'].length;n++) {
@@ -76,7 +80,7 @@ function overlapping() {
                             sectionStartTime = parseInt(section['meetingTimes'][n]['startTimeMilitary']);
                             sectionEndTime = parseInt(section['meetingTimes'][n]['endTimeMilitary']);
                             currentSectionStartTime = parseInt(currentSection['meetingTimes'][m]['startTimeMilitary']);
-                            currentSectionEndTime = parseInt(currentSection['meetingTimes'][m]['startTimeMilitary']);
+                            currentSectionEndTime = parseInt(currentSection['meetingTimes'][m]['endTimeMilitary']);
                             if(sectionStartTime > currentSectionStartTime) {
                                 startTime = sectionStartTime;
                                 endTime = currentSectionEndTime;
@@ -103,6 +107,8 @@ function overlapping() {
                                 );
                                 //Do not continue in order to highlight all the overlappings
                                 //continue nextSection;
+                            } else {
+                            	console.log(currentSection["meetingTimes"]);
                             }
                         }
                     }
@@ -111,6 +117,7 @@ function overlapping() {
 
             }
         }
+        console.log("G");
     }
 }
 

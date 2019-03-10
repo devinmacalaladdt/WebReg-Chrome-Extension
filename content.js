@@ -12,21 +12,6 @@ var registeredHTML = '';
 var injector = chrome.extension.getURL("injector.js");
 var courses_injector = chrome.extension.getURL("courses_injector.js");
 
-function isSameCourses(a, b) {
-    if(a == null && b == null) {
-        return true;
-    }
-    if((a != null && b == null) || (a == null && b != null))
-        return false;
-    if(a.length != b.length)
-        return false;
-    for(i=0;i<a.length;i++) {
-        if(a[i]["courseString"] != b[i]["courseString"])
-            return false;
-    }
-    return true;
-}
-
 document.addEventListener("DZZ_HACK", function(e) {
                         console.log("Change detected");
                         currentCourses = e.detail["currentCourses"];    //Keep hijacking current Courses
@@ -89,7 +74,12 @@ function overlapping() {
                                 startTime = currentSectionStartTime;
                                 endTime = sectionEndTime;
                             }
-                            if(startTime <= endTime) {
+                            if(currentSection['meetingTimes'][m]['CampusAbbrev'] != section['meetingTimes'][n]['CampusAbbrev']) {
+                                offset = 20;
+                            } else {
+                                offset = 0;
+                            }
+                            if(startTime < endTime + offset) {
                                 //Conflict detected 
                                 $($(".sectionData", $("#courseDataParent").children()[j])[k]).css('background-color', '#ffd3d3');
                                 continue nextSection;

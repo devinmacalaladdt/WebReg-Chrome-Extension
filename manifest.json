@@ -29,8 +29,10 @@
     },
     "permissions": [
         "tabs",
-        "https://sims.rutgers.edu/*"
+        "https://sims.rutgers.edu/*",
+        "storage"
     ],
+    "options_page":"options.html",
     "web_accessible_resources": [
         "injector.js",
         "courses_injector.js"

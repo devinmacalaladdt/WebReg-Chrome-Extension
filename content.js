@@ -114,9 +114,25 @@ function events_handler() {
         if(!$("#termlocationlevelform").is(":hidden")) {
             //On the selecting terms directory
             //Click on the button
-            $("#campus_NB").click();
-            $("#level_U").click();
-            $("#continueButton").click();
+            chrome.storage.sync.get("checked_list",function(to_check_str){
+
+            	var str = to_check_str['checked_list'];
+            	str = str.split(";");
+            	var count;
+            	for(count = 0;count<str.length-1;count++){
+
+            		if($("#"+str[count]).prop("checked")!=true){
+
+            			$("#"+str[count]).click();
+
+            		}
+
+            	}
+
+
+            });
+
+            //$("#continueButton").click();
         }
     }
 }

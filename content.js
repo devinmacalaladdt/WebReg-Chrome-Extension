@@ -91,8 +91,18 @@ function overlapping() {
                             }
                             if(startTime < endTime + offset) {
                                 //Conflict detected 
-                                $($(".sectionData", $("#courseDataParent").children()[j])[k]).css('background-color', '#ffd3d3');
-                                continue nextSection;
+                                //Set the background to red
+                                $("#courseDataParent").children().eq(j).find(".sectionData").eq(k)
+                                .css('background-color', '#ffd3d3');
+                                //Set the color of the conflicted time to red
+                                $("#courseDataParent").children().eq(j).find(".sectionData").eq(k).find(".sectionMeetingTimes > .sectionMeetingTimesDiv").children().eq(m) //Get course
+                                .children().each(
+                                    function(){
+                                        $(this).css('color', 'red');
+                                    }
+                                );
+                                //Do not continue in order to highlight all the overlappings
+                                //continue nextSection;
                             }
                         }
                     }

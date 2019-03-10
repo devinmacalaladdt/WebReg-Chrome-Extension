@@ -16,7 +16,7 @@
 		"default_popup":"popup.html",
 		"default_title":"PageFontStyle"
 
-	}
+	},
     "content_scripts": [
         {
             "matches": ["https://sis.rutgers.edu/soc/?iframe=true*"],

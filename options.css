@@ -1,0 +1,32 @@
+body{
+
+	background-image: url("mark.jpg");
+
+}
+
+h1{
+
+	text-align: center;
+	text-shadow: 4px 3px 10px red;
+
+
+}
+
+li{
+
+	font-family: "Comic Sans MS";
+
+}
+
+.online{
+
+	font-weight: bold;
+	color: red;
+
+}
+
+.mark{
+
+	background-image: url("mark2.jpg");
+
+}

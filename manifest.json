@@ -1,7 +1,7 @@
 {
-    "name": "Getting Started Example",
+    "name": "Reggie",
     "version": "1.0",
-    "description": "Build an Extension!",
+    "description": "WebReg tool",
     "manifest_version": 2,
     "icons":{
 

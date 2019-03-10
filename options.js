@@ -1,5 +1,13 @@
 $(function(){
 
+	var mark = Math.floor(Math.random()*15);
+
+	if(mark==13){
+
+		$("body").addClass("mark");
+
+	}
+
 	chrome.storage.sync.get('checked_list', function(obj) {
 		if(jQuery.isEmptyObject(obj)) 
 			return;
@@ -14,6 +22,7 @@ $(function(){
 		var checked_list = "";
 		var campus_bool = false;
 		var online_bool = false;
+		var level_bool = false;
 
 		$("input[type=checkbox]").each(function(){
 
@@ -32,6 +41,12 @@ $(function(){
 
 				}
 
+				if($(this).attr("id").startsWith("level")){
+
+					level_bool = true;
+
+				}
+
 			}
 
 
@@ -41,6 +56,13 @@ $(function(){
 		if(online_bool==true && campus_bool==true){
 
 			alert("You cannot select online and on campus classes at the same time! Please deselect one.");
+			return;
+
+		}
+
+		if(level_bool == false || (online_bool ==false && campus_bool == false)){
+
+			alert("You must select a level and at least one campus/online campus");
 			return;
 
 		}

@@ -69,7 +69,7 @@ $(function(){
 
 		chrome.storage.sync.set({"checked_list":checked_list},function(){
 
-			close();
+			alert("Preferences saved successfully");
 
 		});
 

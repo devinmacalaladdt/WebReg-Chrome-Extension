@@ -1,6 +1,6 @@
 {
     "name": "Reggie",
-    "version": "1.0",
+    "version": "1.1",
     "description": "WebReg tool",
     "manifest_version": 2,
     "icons":{
@@ -10,14 +10,24 @@
 		"16":"16.png"
 
 	},
-	"page_action":{
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "reg@2011ysyb.com", 
+            "strict_min_version": "42.0"
+        }
+    },
+	"browser_action":{
 
 		"default_icon":"16.png",
-        "default_title":"Reggie",
-		"default_popup":"popup.html"
-        
-	},
+		"default_popup":"popup.html",
+		"default_title":"Reggie - A WebReg Extension"
 
+	},
+    "options_ui": {
+        "page": "options.html", 
+        "browser_style": true,
+        "open_in_tab": true
+    },
     "content_scripts": [
         {
             "matches": ["https://sis.rutgers.edu/soc/?iframe=true*"],
@@ -33,7 +43,6 @@
         "https://sims.rutgers.edu/*",
         "storage"
     ],
-    "options_page":"options.html",
     "web_accessible_resources": [
         "injector.js",
         "courses_injector.js",

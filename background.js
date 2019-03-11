@@ -5,4 +5,13 @@ chrome.runtime.onMessage.addListener(
 			fetch(url).then(response => response.text()).then(text => sendResponse(text));
 			return true;
 		}
+		if(request.query=="showPageAction"){
+
+			chrome.tabs.query({active:true,currentWindow:true},function(tabs){
+		
+				chrome.pageAction.show(tabs[0].id);
+
+			});
+
+		}
 	});

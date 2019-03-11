@@ -1,13 +1,13 @@
 //If we selected semesters already, hijack the courses information from browsing page
 
-chrome.runtime.sendMessage({todo: "showPageAction"});
-
 var hijacked_ = false;
 var courses = [];
 var registeredIndexes = [];
 var currentCourses = [];
 var registeredHTML = '';
 var injector = chrome.extension.getURL("injector.js");
+
+chrome.runtime.sendMessage({query: "showPageAction"},function(){});
 
 document.addEventListener("DZZ_HACK", function(e) {
                         console.log("Change detected");
@@ -128,6 +128,7 @@ function go() {
                 registeredIndexes.push($(this).text().slice(1, -1));
             });
         });
+
 }
 
 function generate_links(){

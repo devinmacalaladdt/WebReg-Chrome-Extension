@@ -13,10 +13,11 @@
 	"page_action":{
 
 		"default_icon":"16.png",
-		"default_popup":"popup.html",
-		"default_title":"PageFontStyle"
-
+        "default_title":"Reggie",
+		"default_popup":"popup.html"
+        
 	},
+
     "content_scripts": [
         {
             "matches": ["https://sis.rutgers.edu/soc/?iframe=true*"],

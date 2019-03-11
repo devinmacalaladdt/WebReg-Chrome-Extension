@@ -1,0 +1,21 @@
+body{
+
+	background-color: #ed1c24;
+	color: white;
+
+}
+
+span{
+
+	background-color: white;
+	color: red;
+	font-weight: bold;
+
+}
+
+pre{
+
+	widows: 80%;
+
+}
+

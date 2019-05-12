@@ -91,7 +91,7 @@ function overlapping() {
                             } else {
                                 offset = 0;
                             }
-                            if(startTime < endTime + offset) {
+                            if(startTime <= endTime + offset) {
                                 //Conflict detected 
                                 //Set the background to red
                                 $("#courseDataParent").children().eq(j).find(".sectionData").eq(k)
